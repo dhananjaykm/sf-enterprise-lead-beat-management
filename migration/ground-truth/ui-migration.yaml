@@ -1,0 +1,24 @@
+visualforce:
+  - page: BeatPlanningPage
+    classification: SCREEN_FLOW_CANDIDATE
+  - page: LeadBulkReassignmentPage
+    classification: SCREEN_FLOW_CANDIDATE
+  - page: LeadQualificationPage
+    classification: HYBRID
+  - page: LeadScoringAdminPage
+    classification: NOT_RECOMMENDED
+aura:
+  - component: leadRoutingDashboard
+    classification: SCREEN_FLOW_CANDIDATE
+  - component: beatCalendar
+    classification: LWC_REQUIRED
+lwc:
+  - component: leadAssignmentGrid
+    path: LWC → Apex → DML
+    classification: HYBRID
+  - component: leadQualificationPanel
+    path: LWC → Flow (not deployed)
+    classification: FLOW_EMBEDDING_CANDIDATE
+  - component: visitPlanner
+    path: Flow → LWC (screen component ready)
+    classification: HYBRID

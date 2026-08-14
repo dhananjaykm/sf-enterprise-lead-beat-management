@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Working_Hours_End__c</fullName>
+    <label>Working Hours End</label>
+    <type>Number</type>
+    <precision>4</precision>
+    <scale>0</scale>
+    <required>false</required>
+    <unique>false</unique>
+    <externalId>false</externalId>
+    <defaultValue>18</defaultValue>
+    <description>Working Hours End</description>
+    <trackHistory>false</trackHistory>
+</CustomField>

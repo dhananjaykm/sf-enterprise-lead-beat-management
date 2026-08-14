@@ -1,0 +1,81 @@
+version: 1
+org: sf-enterprise-lead-beat-management
+strategy: legacy-pro-code-no-flow
+automation:
+  - id: LEAD-001
+    business_process: lead_field_derivation
+    source_type: apex
+    source_artifact: LeadFieldDerivationService.cls
+    source_method: derive
+    trigger: { object: Lead, event: before_insert_update }
+    conversion: { classification: A, confidence: high }
+    target: { flow_type: record_triggered, async: immediate, save_type: before }
+    flow_elements: [decision, assignment]
+  - id: LEAD-002
+    business_process: lead_priority
+    source_artifact: LeadPriorityService.cls
+    source_method: apply
+    trigger: { object: Lead, event: before_insert_update }
+    conversion: { classification: A, confidence: high }
+    target: { flow_type: record_triggered, save_type: before }
+    notes: Duplicate logic also in LeadAssignmentUtil — convert once as a subflow.
+  - id: LEAD-003
+    business_process: duplicate_flag
+    source_artifact: LeadDuplicateService.cls
+    conversion: { classification: A, confidence: medium }
+    target: { flow_type: record_triggered, save_type: before }
+    flow_elements: [get_records, decision, assignment]
+  - id: LEAD-004
+    business_process: territory_assignment
+    source_artifact: TerritoryResolutionService.cls
+    conversion: { classification: A, confidence: high }
+    target: { flow_type: record_triggered, save_type: after }
+  - id: LEAD-005
+    business_process: beat_assignment
+    source_artifact: BeatResolutionService.cls
+    conversion: { classification: A, confidence: high }
+  - id: LEAD-006
+    business_process: lead_assignment_orchestration
+    source_artifact: LeadAssignmentService.cls
+    conversion: { classification: D, confidence: medium }
+    retain_apex: [SalesRepCapacityService]
+    target: { flow_type: record_triggered, save_type: after }
+  - id: LEAD-007
+    business_process: lead_scoring
+    source_artifact: LeadScoringService.cls
+    conversion: { classification: D, confidence: medium }
+    retain_apex: [engagement_curve, ScoringMathEngine]
+  - id: LEAD-008
+    business_process: visit_creation
+    source_artifact: VisitPlanningService.cls
+    conversion: { classification: A, confidence: high }
+    target: { flow_type: record_triggered, save_type: after }
+  - id: LEAD-009
+    business_process: visit_reminder
+    source_artifact: VisitReminderService.cls
+    conversion: { classification: A, confidence: high }
+    target: { flow_type: scheduled_triggered }
+    async: scheduled_path
+  - id: LEAD-010
+    business_process: enrichment_callout
+    source_artifact: LeadIntegrationService.cls
+    conversion: { classification: C, confidence: high }
+    retain_apex: [http_callout]
+  - id: LEAD-011
+    business_process: nightly_scoring
+    source_artifact: LeadScoringBatch.cls
+    conversion: { classification: E, confidence: high }
+  - id: LEAD-012
+    business_process: beat_optimization
+    source_artifact: ScoringMathEngine.cls
+    conversion: { classification: G, confidence: high }
+  - id: LEAD-013
+    business_process: create_visit_action
+    source_artifact: CreateVisitInvocable.cls
+    conversion: { classification: B, confidence: high }
+    notes: Keep invocable; call from Flow. Do not rewrite.
+  - id: LEAD-014
+    business_process: platform_event_assignment
+    source_artifact: Lead_Assigned__e
+    conversion: { classification: A, confidence: medium }
+    target: { flow_type: platform_event_triggered }

@@ -1,0 +1,20 @@
+<!-- MIGRATION_CLASSIFICATION: HYBRID -->
+<!-- This legacy Visualforce page is a candidate for later Flow/LWC evaluation. -->
+<apex:page standardController="Lead" extensions="LeadQualificationExtension" lightningStylesheets="true">
+    <apex:sectionHeader title="Lead Qualification" subtitle="{!Lead.Name}"/>
+    <apex:pageMessages/>
+    <apex:form>
+        <apex:pageBlock title="Lead Qualification" mode="edit">
+            <apex:pageBlockButtons>
+                <apex:commandButton value="Save" action="{!saveRelated}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection>
+                <apex:inputField value="{!Lead.Name}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Legacy derived fields">
+                <apex:outputText value="{!derivedSummary}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

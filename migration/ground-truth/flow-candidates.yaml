@@ -1,0 +1,12 @@
+candidates:
+  - id: LEAD-001
+    recommended_flow: before_save_record_triggered
+  - id: LEAD-008
+    recommended_flow: after_save_record_triggered
+  - id: LEAD-009
+    recommended_flow: scheduled_triggered_or_scheduled_path
+  - id: LEAD-013
+    recommended_flow: autolaunched_or_screen_calling_invocable
+  - id: UI-BEAT-PLAN
+    recommended_flow: screen_flow
+    source: BeatPlanningPage

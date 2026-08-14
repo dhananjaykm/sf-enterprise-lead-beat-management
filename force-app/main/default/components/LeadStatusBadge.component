@@ -1,0 +1,5 @@
+<!-- MIGRATION_CLASSIFICATION: LWC_REQUIRED -->
+<apex:component>
+    <apex:attribute name="status" type="String" required="true"/>
+    <span class="badge">{!status}</span>
+</apex:component>

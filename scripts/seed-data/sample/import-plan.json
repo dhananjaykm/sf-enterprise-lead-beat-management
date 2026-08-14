@@ -1,0 +1,5 @@
+{
+  "sobjects": [
+    { "sobject": "Territory__c", "files": ["Territory__c.csv"] }
+  ]
+}

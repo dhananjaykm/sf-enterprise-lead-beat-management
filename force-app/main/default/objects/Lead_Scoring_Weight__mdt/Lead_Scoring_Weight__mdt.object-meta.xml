@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Lead Scoring Weight</label>
+    <pluralLabel>Lead Scoring Weights</pluralLabel>
+    <description></description>
+    <visibility>Public</visibility>
+</CustomObject>

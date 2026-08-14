@@ -1,0 +1,13 @@
+risks:
+  - id: R1
+    topic: duplicate_priority_rules
+    detail: LeadPriorityService and LeadAssignmentUtil both stamp GOLD as Critical. Converting both creates double-updates.
+  - id: R2
+    topic: governor_limits
+    detail: LeadScoringBatch + recursiveDecay is unsafe in Flow loops.
+  - id: R3
+    topic: before_vs_after
+    detail: Territory_Code__c is set in after-insert services today; a before-save Flow would be more efficient but changes trigger order.
+  - id: R4
+    topic: bulkification
+    detail: 10k lead seed volume requires collection processing, not per-record screen flows.

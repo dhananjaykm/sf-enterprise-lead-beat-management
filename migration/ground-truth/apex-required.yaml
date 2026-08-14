@@ -1,0 +1,11 @@
+retain:
+  - class: ScoringMathEngine
+    reason: recursive/CPU-heavy optimization
+  - class: LeadScoringBatch
+    reason: high-volume nightly processing
+  - class: LeadIntegrationService
+    reason: HTTP callout and authentication
+  - class: LeadConversionService
+    reason: Database.convertLead is not a Flow native
+  - class: TriggerHandlerBase
+    reason: framework
